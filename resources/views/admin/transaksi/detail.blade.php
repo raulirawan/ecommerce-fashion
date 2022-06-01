@@ -51,6 +51,26 @@
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
+                                        <th style="width: 400px">Status</th>
+                                        @if ($transaksi->status == 'SUCCESS')
+                                            <td>
+                                                <span class="badge badge-success">SUCCESS</span>
+                                            </td>
+                                        @elseif ($transaksi->status == 'PENDING')
+                                        <td>
+                                            <span class="badge badge-warning">PENDING</span>
+                                        </td>
+                                        @else
+                                        <td>
+                                            <span class="badge badge-danger">CANCELLED</span>
+                                        </td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                        <th style="width: 400px">No Resi</th>
+                                        <td>{{ $transaksi->no_resi != NULL ? $transaksi->no_resi : 'Tidak Ada' }}</td>
+                                    </tr>
+                                    <tr>
                                         <th style="width: 400px">Tanggal Transaksi</th>
                                         <td>{{ $transaksi->created_at }}</td>
                                     </tr>
@@ -95,10 +115,19 @@
                                         <th style="width: 400px">Total Harga</th>
                                         <td>Rp{{ number_format($transaksi->total_harga) }}</td>
                                     </tr>
-
                                 </tbody>
                             </table>
-
+                           @if ($transaksi->status == 'SUCCESS')
+                           <form action="{{ route('admin.transaksi.update.resi', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" name="no_resi" placeholder="Masukan No Resi" class="form-control">
+                                    <button class="btn btn-primary mt-3" style="display: inline; float: left">Update Resi</button>
+                                </div>
+                            </div>
+                        </form>
+                           @endif
                         </div>
                     </div>
                     <div class="card">

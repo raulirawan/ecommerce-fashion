@@ -47,7 +47,7 @@
                     </div>
                     <div class="row input-daterange ml-2 mt-2">
                         <div class="col-md-4">
-                            <input type="date" name="from_date" id="from_date" value="{{ date('Y-m-d') }}" class="form-control"
+                            <input type="date" name="from_date" id="from_date" value="{{ date('Y-m-d', strtotime('-7 days')) }}" class="form-control"
                                 placeholder="From Date" />
                         </div>
                         <div class="col-md-4">

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title','Halaman Produk')
+@section('title','Halaman Customer')
 
 @section('content')
 <div class="breadcrumbs">
@@ -9,7 +9,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Produk</h1>
+                        <h1>Customer</h1>
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Produk</a></li>
+                            <li><a href="#">Customer</a></li>
                         </ol>
                     </div>
                 </div>
@@ -43,8 +43,8 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Tabel Produk</strong>
-                        <button data-toggle="modal" data-target="#modal-create" class="btn btn-info btn-sm mb-3 float-right">Tambah Produk</button>
+                        <strong class="card-title">Tabel Customer</strong>
+                        <button data-toggle="modal" data-target="#modal-create" class="btn btn-info btn-sm mb-3 float-right">Tambah Customer</button>
                     </div>
                     <div class="card-body">
 
@@ -55,24 +55,18 @@
                                     <tr>
                                         <th style="width: 5%">No</th>
                                         <th>Nama</th>
-                                        <th>Kategori</th>
-                                        <th>Stok</th>
-                                        <th>Gambar</th>
-                                        <th>Harga</th>
+                                        <th>Email</th>
+                                        <th>No HP</th>
                                         <th style="width: 15%">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($produk as $item)
+                                    @foreach ($customer as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->nama_produk }}</td>
-                                            <td>{{ $item->kategori->nama_kategori }}</td>
-                                            <td>{{ $item->stok }}</td>
-                                            <td>
-                                                <img src="{{ url($item->gambar) }}" style="width: 100px">
-                                            </td>
-                                            <td>Rp{{ number_format($item->harga) }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->no_hp ?? 'Tidak Ada' }}</td>
                                             <td>
                                                 <button
                                                 id="edit"
@@ -80,13 +74,10 @@
                                                 data-target="#modal-edit"
                                                 class="btn btn-primary btn-sm float-left mr-1"
                                                 data-id="{{ $item->id }}"
-                                                data-nama_produk="{{ $item->nama_produk }}"
-                                                data-kategori="{{ $item->kategori->id }}"
-                                                data-stok="{{ $item->stok }}"
-                                                data-gambar="{{ $item->gambar }}"
-                                                data-harga="{{ $item->harga }}"
+                                                data-nama_customer="{{ $item->name }}"
+                                                data-no_hp="{{ $item->no_hp }}"
                                                 >Edit</button>
-                                                <form action="{{ route('admin.produk.delete', $item->id) }}" method="POST">
+                                                <form action="{{ route('admin.customer.delete', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('delete')
                                                     <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin ?')">Hapus</button>
@@ -110,43 +101,37 @@ aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Produk</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Customer</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="{{ route('admin.produk.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.customer.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nama Produk</label>
+                        <label for="exampleInputEmail1">Nama Customer</label>
                         <input type="text" class="form-control"
-                            value="{{ old('nama_produk') }}" name="nama_produk" placeholder="Masukan Nama Produk" required>
+                            value="{{ old('nama_customer') }}" name="nama_customer" placeholder="Masukan Nama Customer" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Kategori</label>
-                        <select name="kategori_id" id="kategori_id" class="form-control" required>
-                            <option value="">Pilih Kategori</option>
-                            @foreach ($kategoris = App\Kategori::all() as $kategori)
-                            <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
-                            @endforeach
-                        </select>
+                        <label for="exampleInputEmail1">Email Customer</label>
+                        <input type="email" class="form-control"
+                            value="{{ old('email') }}" name="email" placeholder="Masukan Email" required>
+                        @if ($errors->has('email'))
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                        @endif
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Stok</label>
+                        <label for="exampleInputEmail1">Password</label>
+                        <input type="password" class="form-control"
+                            value="{{ old('password') }}" name="password" placeholder="Masukan Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">No HP</label>
                         <input type="number" class="form-control"
-                            value="{{ old('stok') }}" name="stok" placeholder="Masukan Stok" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Gambar</label>
-                        <input type="file" class="form-control"
-                             name="gambar" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Harga</label>
-                        <input type="number" class="form-control"
-                            value="{{ old('harga') }}" name="harga" placeholder="Masukan Harga" required>
+                            value="{{ old('no_hp') }}" name="no_hp" placeholder="Masukan Nomor HP Customer" required>
                     </div>
                 </div>
 
@@ -166,7 +151,7 @@ aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Data Produk</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit Data Customer</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -176,34 +161,14 @@ aria-hidden="true">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nama Produk</label>
+                        <label for="exampleInputEmail1">Nama Customer</label>
                         <input type="text" class="form-control"
-                            value="{{ old('nama_produk') }}" id="nama_produk" name="nama_produk" placeholder="Masukan Nama Produk" required>
+                             id="nama_customer" name="nama_customer" placeholder="Masukan Nama Customer" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Kategori</label>
-                        <select name="kategori_id" id="kategori_edit" class="form-control" required>
-                            @foreach ($kategoris = App\Kategori::all() as $kategori)
-                            <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Stok</label>
+                        <label for="exampleInputEmail1">Nomor Handphone</label>
                         <input type="number" class="form-control"
-                            value="{{ old('stok') }}" name="stok" id="stok" placeholder="Masukan Stok" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Gambar</label>
-                        <input type="file" class="form-control"
-                             name="gambar">
-                        <img src="" alt="" id="gambar" class="mt-2" style="width: 100px">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Harga</label>
-                        <input type="number" class="form-control"
-                            value="{{ old('harga') }}" name="harga" id="harga" placeholder="Masukan Harga" required>
+                             id="no_hp" name="no_hp" placeholder="Masukan Nomor Handphone" required>
                     </div>
                 </div>
 
@@ -218,23 +183,22 @@ aria-hidden="true">
 </div>
 </div>
 @push('down-script')
+@if (count($errors) > 0)
+<script type="text/javascript">
+    $('#modal-create').modal('show');
+</script>
+@endif
 <script>
+
     $(document).on('click', '#edit', function(){
+        // e.preventDefault();
         var id = $(this).data('id');
-        var nama_produk = $(this).data('nama_produk');
-        var kategori = $(this).data('kategori');
-        var stok = $(this).data('stok');
-        var gambar = $(this).data('gambar');
-        var harga = $(this).data('harga');
-        var url = '{{ url('/') }}';
+        var nama_customer = $(this).data('nama_customer');
+        var no_hp = $(this).data('no_hp');
+        $('#nama_customer').val(nama_customer);
+        $('#no_hp').val(no_hp);
 
-        $('#nama_produk').val(nama_produk);
-        $('#kategori_edit').val(kategori).change();
-        $('#stok').val(stok);
-        $('#gambar').attr('src', url + '/' + gambar);
-        $('#harga').val(harga);
-
-        $('#form-edit').attr('action','/admin/produk/update/' + id);
+        $('#form-edit').attr('action','/admin/customer/update/' + id);
     });
 </script>
 <script src="{{ asset('/') }}assets/js/lib/data-table/datatables.min.js"></script>

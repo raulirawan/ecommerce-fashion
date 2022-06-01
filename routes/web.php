@@ -20,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware(['admin','auth'])->group(function () {
     Route::get('dashboard','Admin\DashboardController@index')->name('admin.dashboard.index');
 
+
+    // CRUD CUSTOMER
+    Route::get('customer', 'Admin\CustomerController@index')->name('admin.customer.index');
+    Route::post('customer/create', 'Admin\CustomerController@store')->name('admin.customer.store');
+    Route::post('customer/update/{id}', 'Admin\CustomerController@update')->name('admin.customer.update');
+    Route::delete('customer/delete/{id}', 'Admin\CustomerController@delete')->name('admin.customer.delete');
+
     // CRUD KATEGORI
     Route::get('kategori', 'Admin\KategoriController@index')->name('admin.kategori.index');
     Route::post('kategori/create', 'Admin\KategoriController@store')->name('admin.kategori.store');
@@ -37,6 +44,7 @@ Route::prefix('admin')->middleware(['admin','auth'])->group(function () {
     Route::get('transaksi', 'Admin\TransaksiController@index')->name('admin.transaksi.index');
     Route::get('transaksi/detail/{id}', 'Admin\TransaksiController@detail')->name('admin.transaksi.detail');
     Route::post('transaksi/update/{id}', 'Admin\TransaksiController@update')->name('admin.transaksi.update');
+    Route::post('transaksi/update/resi/{id}', 'Admin\TransaksiController@updateResi')->name('admin.transaksi.update.resi');
 
 
 });

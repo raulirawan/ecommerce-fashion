@@ -79,4 +79,17 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::with(['detail','user'])->findOrFail($id);
         return view('admin.transaksi.detail', compact('transaksi'));
     }
+
+    public function updateResi(Request $request, $id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->no_resi = $request->no_resi;
+        $transaksi->save();
+
+        if($transaksi != null) {
+            return redirect()->route('admin.transaksi.detail', $id)->with('success','Data Resi Berhasil di Update');
+        } else {
+            return redirect()->route('admin.transaksi.detail', $id)->with('error','Data Resi Gagal di Update');
+        }
+    }
 }

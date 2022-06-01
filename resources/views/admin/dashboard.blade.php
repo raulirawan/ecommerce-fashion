@@ -17,7 +17,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text">$<span class="count">23569</span></div>
+                                    <div class="stat-text"><span class="count">{{ $pendapatan }}</span></div>
                                     <div class="stat-heading">Pendapatan</div>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">3435</span></div>
+                                    <div class="stat-text"><span class="count">{{ $produk }}</span></div>
                                     <div class="stat-heading">Produk</div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">349</span></div>
+                                    <div class="stat-text"><span class="count">{{ $success }}</span></div>
                                     <div class="stat-heading">Transaksi Sukses</div>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">2986</span></div>
+                                    <div class="stat-text"><span class="count">{{ $customer }}</span></div>
                                     <div class="stat-heading">Customer</div>
                                 </div>
                             </div>

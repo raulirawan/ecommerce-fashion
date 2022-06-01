@@ -158,8 +158,7 @@ aria-hidden="true">
 </div>
 @push('down-script')
 <script>
-    $("#edit").click(function (e) {
-        e.preventDefault();
+    $(document).on('click', '#edit', function(){
         var id = $(this).data('id');
         var nama_kategori = $(this).data('nama_kategori');
         $('#nama_kategori').val(nama_kategori);
