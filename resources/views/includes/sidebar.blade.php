@@ -2,6 +2,7 @@
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
+                @if (Auth::user()->roles == 'ADMIN')
                 <li class="{{ request()->is('admin/dashboard*') ? 'active' : '' }}">
                     <a href="{{ route('admin.dashboard.index') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
@@ -19,6 +20,14 @@
                 <li class="{{ request()->is('admin/transaksi*') ? 'active' : '' }}">
                     <a href="{{ route('admin.transaksi.index') }}"><i class="menu-icon fa fa-file-text"></i>Transaksi </a>
                 </li>
+                @elseif (Auth::user()->roles == 'PIMPINAN')
+                <li class="{{ request()->is('pimpinan/dashboard*') ? 'active' : '' }}">
+                    <a href="{{ route('pimpinan.dashboard.index') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                </li>
+                <li class="{{ request()->is('pimpinan/transaksi*') ? 'active' : '' }}">
+                    <a href="{{ route('pimpinan.transaksi.index') }}"><i class="menu-icon fa fa-file-text"></i>Transaksi </a>
+                </li>
+                @endif
                 <li class="">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"><i class="menu-icon fa fa-sign-out"></i>Logout </a>

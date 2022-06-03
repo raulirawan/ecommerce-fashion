@@ -13,9 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/','HomeController@index')->name('home.index');
+Route::get('/produk/{slug}','ProdukController@detail')->name('produk.detail');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('transaksi','TransaksiController@index')->name('transaksi.index');
+    Route::get('transaksi/detail/{id}','TransaksiController@detail')->name('transaksi.detail');
+
+    Route::get('profil','ProfilController@index')->name('profil.index');
+    Route::post('profil/update-password','ProfilController@updatePassword')->name('update.password');
+    Route::post('profil/update','ProfilController@update')->name('update.profil');
+
+    Route::get('cart','CartController@index')->name('cart.index');
+    Route::post('add/cart/{id}','CartController@addCart')->name('add.cart');
+    Route::get('delete/cart/{id}','CartController@delete')->name('delete.cart');
+
+    Route::get('/checkout','CheckoutController@index')->name('checkout.index');
+
+
+});
+
 
 Route::prefix('admin')->middleware(['admin','auth'])->group(function () {
     Route::get('dashboard','Admin\DashboardController@index')->name('admin.dashboard.index');
@@ -48,6 +66,20 @@ Route::prefix('admin')->middleware(['admin','auth'])->group(function () {
 
 
 });
+
+Route::prefix('pimpinan')->middleware(['auth'])->group(function () {
+    Route::get('dashboard','Admin\DashboardController@index')->name('pimpinan.dashboard.index');
+
+    // Transaksi
+    Route::get('transaksi', 'Admin\TransaksiController@index')->name('pimpinan.transaksi.index');
+    Route::get('transaksi/detail/{id}', 'Admin\TransaksiController@detail')->name('pimpinan.transaksi.detail');
+    Route::post('transaksi/update/{id}', 'Admin\TransaksiController@update')->name('pimpinan.transaksi.update');
+    Route::post('transaksi/update/resi/{id}', 'Admin\TransaksiController@updateResi')->name('pimpinan.transaksi.update.resi');
+
+
+});
+
+
 
 Auth::routes();
 

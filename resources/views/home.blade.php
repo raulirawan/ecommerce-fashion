@@ -1,23 +1,62 @@
-@extends('layouts.app')
+@extends('layouts.frontend')
+
+@section('title','Home')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
+<div class="site-blocks-cover" data-aos="fade">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto order-md-2 align-self-start">
+          <div class="site-block-cover-content">
+          <h2 class="sub-title">#New Summer Collection 2019</h2>
+          <h1>Arrivals Sales</h1>
+          <p><a href="#" class="btn btn-black rounded-0">Shop Now</a></p>
+          </div>
         </div>
+        <div class="col-md-6 order-1 align-self-end">
+          <img src="{{ asset('/frontend') }}/images/model_3.png" alt="Image" class="img-fluid">
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="title-section mb-5 col-12">
+          <h2 class="text-uppercase">Popular Products</h2>
+        </div>
+      </div>
+      <div class="row">
+        @foreach ($produk as $item)
+            <div class="col-lg-4 col-md-6 item-entry mb-4">
+            <a href="{{ route('produk.detail', $item->slug) }}" class="product-item md-height bg-gray d-block">
+              <img src="{{ url($item->gambar) }}" alt="Image" class="img-fluid">
+            </a>
+            <h2 class="item-title"><a href="#">{{ $item->nama_produk }}</a></h2>
+            <strong class="item-price">{{ number_format($item->harga) }}</strong>
+          </div>
+        @endforeach
+      </div>
+    </div>
+  </div>
+
+
+  <div class="site-blocks-cover inner-page py-5" data-aos="fade">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto order-md-2 align-self-start">
+          <div class="site-block-cover-content">
+          <h2 class="sub-title">#New Summer Collection 2019</h2>
+          <h1>New Shoes</h1>
+          <p><a href="#" class="btn btn-black rounded-0">Shop Now</a></p>
+          </div>
+        </div>
+        <div class="col-md-6 order-1 align-self-end">
+          <img src="{{ asset('/frontend') }}/images/model_6.png" alt="Image" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

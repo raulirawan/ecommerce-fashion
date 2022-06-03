@@ -6,6 +6,7 @@ use App\Transaksi;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
@@ -31,15 +32,17 @@ class TransaksiController extends Controller
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
-                    return '<a href="'.route('admin.transaksi.detail', $item->id).'" class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Detail</a>
-                    <button
-                    id="edit"
-                    data-toggle="modal"
-                    data-target="#modal-edit"
-                    class="btn btn-primary btn-sm"
-                    data-id="'.$item->id.'"
-                    data-status="'.$item->status.'"
-                    >Edit</button> ';
+                   if(Auth::user()->roles == 'ADMIN') {
+                        return '<a href="'.route('admin.transaksi.detail', $item->id).'" class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Detail</a>
+                        <button
+                        id="edit"
+                        data-toggle="modal"
+                        data-target="#modal-edit"
+                        class="btn btn-primary btn-sm"
+                        data-id="'.$item->id.'"
+                        data-status="'.$item->status.'"
+                        >Edit</button> ';
+                   }
                 })
                 ->editColumn('status', function ($item) {
                     if($item->status == 'SUCCESS'){

@@ -73,7 +73,9 @@
                                         <th>Customer</th>
                                         <th>Status</th>
                                         <th>Total Harga</th>
+                                        @if (Auth::user()->roles == 'ADMIN')
                                         <th style="width: 15%">Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -143,6 +145,10 @@ aria-hidden="true">
 <script src="{{ asset('/') }}assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="{{ asset('/') }}assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="{{ asset('/') }}assets/js/init/datatables-init.js"></script>
+<link href="https://nightly.datatables.net/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+
 <script>
     $(document).on('click', '#edit', function(){
         var id = $(this).data('id');
@@ -154,7 +160,9 @@ aria-hidden="true">
 </script>
 <script>
         $(document).ready(function() {
-            load_data()
+            var from_date = $('#from_date').val();
+            var to_date = $('#to_date').val();
+            load_data(from_date, to_date);
 
             $('#filter').click(function() {
                 var from_date = $('#from_date').val();
