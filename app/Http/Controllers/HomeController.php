@@ -28,4 +28,9 @@ class HomeController extends Controller
 
         return view('home', compact('produk'));
     }
+
+    public function success()
+    {
+        return view('success');
+    }
 }

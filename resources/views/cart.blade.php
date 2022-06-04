@@ -7,7 +7,7 @@
 <div class="bg-light py-3">
     <div class="container">
       <div class="row">
-        <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Cart</strong></div>
+        <div class="col-md-12 mb-0"><a href="{{ route('home.index') }}">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Cart</strong></div>
       </div>
     </div>
   </div>
@@ -47,11 +47,11 @@
                     <td class="product-name">
                       <h2 class="h5 text-black">{{ $cart->produk->nama_produk }}</h2>
                     </td>
-                    <td>$49.00</td>
+                    <td>Rp{{ number_format($cart->produk->harga) }}</td>
                     <td>
                         {{ $cart->qty }}
                     </td>
-                    <td>Rp{{ number_format($cart->produk->harga) }}</td>
+                    <td>Rp{{ number_format($cart->harga) }}</td>
                     <td><a href="{{ route('delete.cart', $cart->id) }}" onclick="return confirm('Yakin Hapus ?')" class="btn btn-primary height-auto btn-sm">X</a></td>
                   </tr>
                 @empty
@@ -90,6 +90,8 @@
             </div>
           </div> --}}
         </div>
+        @if (!$carts->isEmpty())
+
         <div class="col-md-6 pl-5">
           <div class="row justify-content-end">
             <div class="col-md-7">
@@ -113,6 +115,7 @@
                   <button class="btn btn-primary btn-lg btn-block" onclick="window.location='/checkout'">Proceed To Checkout</button>
                 </div>
               </div>
+              @endif
             </div>
           </div>
         </div>

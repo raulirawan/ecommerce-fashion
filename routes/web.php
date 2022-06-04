@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','HomeController@index')->name('home.index');
+Route::get('/kategori/{slug}','KategoriController@index')->name('kategori.index');
 Route::get('/produk/{slug}','ProdukController@detail')->name('produk.detail');
+
+Route::get('/shop','ShopController@index')->name('shop.index');
+
+Route::get('/search','ProdukController@search')->name('search.index');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -30,6 +35,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('delete/cart/{id}','CartController@delete')->name('delete.cart');
 
     Route::get('/checkout','CheckoutController@index')->name('checkout.index');
+    Route::get('/kota','CheckoutController@getKota')->name('fetch.kota');
+    Route::post('/ongkir','CheckoutController@ongkir')->name('get.ongkir');
+
+    Route::post('/checkout','CheckoutController@checkoutPost')->name('checkout.post');
+
+    Route::get('/success','HomeController@success')->name('success.index');
+
 
 
 });
@@ -63,8 +75,6 @@ Route::prefix('admin')->middleware(['admin','auth'])->group(function () {
     Route::get('transaksi/detail/{id}', 'Admin\TransaksiController@detail')->name('admin.transaksi.detail');
     Route::post('transaksi/update/{id}', 'Admin\TransaksiController@update')->name('admin.transaksi.update');
     Route::post('transaksi/update/resi/{id}', 'Admin\TransaksiController@updateResi')->name('admin.transaksi.update.resi');
-
-
 });
 
 Route::prefix('pimpinan')->middleware(['auth'])->group(function () {
@@ -83,4 +93,4 @@ Route::prefix('pimpinan')->middleware(['auth'])->group(function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/midtrans/callback', 'MidtransController@callback')->name('midtrans.callback');

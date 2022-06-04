@@ -29,15 +29,17 @@
         </div>
       </div>
       <div class="row">
-        @foreach ($produk as $item)
-            <div class="col-lg-4 col-md-6 item-entry mb-4">
-            <a href="{{ route('produk.detail', $item->slug) }}" class="product-item md-height bg-gray d-block">
-              <img src="{{ url($item->gambar) }}" alt="Image" class="img-fluid">
-            </a>
-            <h2 class="item-title"><a href="#">{{ $item->nama_produk }}</a></h2>
-            <strong class="item-price">{{ number_format($item->harga) }}</strong>
-          </div>
-        @endforeach
+        @forelse ($produk as $item)
+        <div class="col-lg-4 col-md-6 item-entry mb-4">
+        <a href="{{ route('produk.detail', $item->slug) }}" class="product-item md-height bg-gray d-block">
+          <img src="{{ url($item->gambar) }}" alt="Image" class="img-fluid">
+        </a>
+        <h2 class="item-title"><a href="#">{{ $item->nama_produk }}</a></h2>
+        <strong class="item-price">{{ number_format($item->harga) }}</strong>
+      </div>
+        @empty
+        <div class="text-center">Tidak Ada Data Produk</div>
+        @endforelse
       </div>
     </div>
   </div>

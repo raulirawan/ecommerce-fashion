@@ -70,7 +70,7 @@
                             class="btn btn-info">Detail
                         </a>
                         @if ($item->status == 'PENDING')
-                        <a href="#" class="btn btn-success">Bayar</a>
+                        <a href="{{ url($item->link_pembayaran) }}" target="_blank" class="btn btn-success">Bayar</a>
                         @endif
                     </td>
                 </tr>
@@ -121,6 +121,9 @@ aria-hidden="true">
 
   @push('down-script')
   <script>
+      function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
       function detailTransaction(transaction_id) {
             $('#data-detail').html('');
             $.ajax({
@@ -134,7 +137,7 @@ aria-hidden="true">
                             <tr>
                                 <td>${val.produk.nama_produk}</td>
                                 <td>${val.qty}</td>
-                                <td>${val.harga}</td>
+                                <td>Rp${numberWithCommas(val.harga)}</td>
                             </tr>
                         `;
                     })
