@@ -95,14 +95,7 @@
                                         <th style="width: 400px">Kota</th>
                                         <td>{{ $transaksi->kota }}</td>
                                     </tr>
-                                    <tr>
-                                        <th style="width: 400px">Kecamatan</th>
-                                        <td>{{ $transaksi->kecamatan }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="width: 400px">Kelurahan</th>
-                                        <td>{{ $transaksi->kelurahan }}</td>
-                                    </tr>
+
                                     <tr>
                                         <th style="width: 400px">Ongkos Kirim</th>
                                         <td>Rp{{ number_format($transaksi->ongkos_kirim) }}</td>

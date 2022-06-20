@@ -13,7 +13,8 @@
       <div class="d-flex align-items-center justify-content-between">
         <div class="logo">
           <div class="site-logo">
-            <a href="index.html" class="js-logo-clone">ShopMax</a>
+            <a href="{{ url('/') }}" class="js-logo-clone">Murni Collection</a>
+
           </div>
         </div>
         <div class="main-nav d-none d-lg-block">
@@ -58,11 +59,13 @@
         <div class="icons">
           <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
           {{-- <a href="#" class="icons-btn d-inline-block"><span class="icon-heart-o"></span></a> --}}
-          <a href="{{ route('cart.index') }}" class="icons-btn d-inline-block bag mr-3">
+        @auth
+        <a href="{{ route('cart.index') }}" class="icons-btn d-inline-block bag mr-3">
             <span class="icon-shopping-bag"></span>
             <span class="number">{{ App\Cart::where('user_id', Auth::user()->id)->count() }}</span>
           </a>
 
+        @endauth
           <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
         </div>
       </div>

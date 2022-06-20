@@ -260,6 +260,9 @@
                 var provinsiVal = $('select[name=provinsi] option').filter(':selected').val();
                 var kota = $('select[name=kota] option').filter(':selected').text();
                 var kotaVal = $('select[name=kota] option').filter(':selected').val();
+                var kurir = $('select[name=kurir] option').filter(':selected').val();
+                var layanan = $('select[name=layanan] option').filter(':selected').text();
+
                  if(provinsiVal == ''){
                     alert('Provinsi Tidak Boleh Kosong!');
                     return false;
@@ -284,6 +287,8 @@
                     "alamat": alamat,
                     "provinsi": provinsi,
                     "kota": kota,
+                    "kurir": kurir,
+                    "layanan": layanan,
                 },
                 dataType: 'json',
                 success: function (result, textStatus, jqXHR) {

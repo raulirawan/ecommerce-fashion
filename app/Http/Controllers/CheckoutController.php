@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use Exception;
+use App\Produk;
 use App\Transaksi;
 use Midtrans\Snap;
 use Midtrans\Config;
 use App\TransaksiDetail;
 use App\Helpers\ApiHelper;
-use App\Produk;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -70,9 +71,12 @@ class CheckoutController extends Controller
 
         $total_harga = $harga + $ongkir;
 
+        $data_layanan = $request->layanan;
+        $layanan = explode(' ', $data_layanan);
         // insert ke transaction
         $transaksi = new Transaksi();
         $transaksi->user_id = Auth::user()->id;
+        $transaksi->ekspedisi = Str::upper($request->kurir).' | '.$layanan[0];
         $transaksi->kode = $kode;
         $transaksi->harga = $harga;
         $transaksi->total_harga = $total_harga;

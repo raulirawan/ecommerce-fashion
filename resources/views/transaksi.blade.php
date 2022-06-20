@@ -40,6 +40,7 @@
                   <th>Ongkos Kirim</th>
                   <th>Harga</th>
                   <th>Total Harga</th>
+                  <th>Ekspedisi</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -61,6 +62,7 @@
                     <td>Rp{{ number_format($item->ongkos_kirim) }}</td>
                     <td>Rp{{ number_format($item->harga) }}</td>
                     <td>Rp{{ number_format($item->total_harga) }}</td>
+                    <td>{{ $item->ekspedisi }}</td>
                     <td>
                         <a
                             style="color: #fff"
