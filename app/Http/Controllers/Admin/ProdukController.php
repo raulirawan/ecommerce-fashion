@@ -12,7 +12,7 @@ class ProdukController extends Controller
     public function index()
     {
         $produk = Produk::all();
-        return view('Admin.produk.index', compact('produk'));
+        return view('admin.produk.index', compact('produk'));
     }
 
     public function store(Request $request)

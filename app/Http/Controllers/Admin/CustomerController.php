@@ -11,7 +11,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = User::where('roles','CUSTOMER')->get();
-        return view('Admin.customer.index', compact('customer'));
+        return view('admin.customer.index', compact('customer'));
     }
 
     public function store(Request $request)

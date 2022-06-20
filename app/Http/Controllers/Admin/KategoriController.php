@@ -12,7 +12,7 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::all();
-        return view('Admin.kategori.index', compact('kategori'));
+        return view('admin.kategori.index', compact('kategori'));
     }
 
     public function store(Request $request)
