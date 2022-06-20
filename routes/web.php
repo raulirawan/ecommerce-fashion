@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/clear-cache', function() {
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    return 'cache-clear';
+});
 
 Route::get('/','HomeController@index')->name('home.index');
 Route::get('/kategori/{slug}','KategoriController@index')->name('kategori.index');
