@@ -97,7 +97,9 @@ class CheckoutController extends Controller
                 'first_name' => Auth::user()->name,
                 'email' => Auth::user()->email,
             ],
-
+            'callbacks' => [
+                'finish' => 'https://murnicollection.my.id/success',
+            ],
             'enable_payments' => ['bca_va','permata_va','bni_va','bri_va','gopay'],
             'vtweb' => [],
         ];
