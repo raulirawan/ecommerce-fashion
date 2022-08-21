@@ -21,29 +21,32 @@
   </div>
 
 
-  <div class="site-section">
+  <div class="site-section custom-border-bottom" data-aos="fade">
     <div class="container">
-      <div class="row">
-        <div class="title-section mb-5 col-12">
-          <h2 class="text-uppercase">Popular Products</h2>
+      <div class="row mb-5">
+        <div class="col-md-6">
+          <div class="block-16">
+            <figure>
+              <img src="{{ asset('frontend/images/blog_1.jpg') }}" alt="Image placeholder" class="img-fluid rounded">
+              {{-- <a href="https://vimeo.com/channels/staffpicks/93951774" class="play-button popup-vimeo"><span class="icon-play"></span></a> --}}
+
+            </figure>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        @forelse ($produk as $item)
-        <div class="col-lg-4 col-md-6 item-entry mb-4">
-        <a href="{{ route('produk.detail', $item->slug) }}" class="product-item md-height bg-gray d-block">
-          <img src="{{ url($item->gambar) }}" alt="Image" class="img-fluid">
-        </a>
-        <h2 class="item-title"><a href="#">{{ $item->nama_produk }}</a></h2>
-        <strong class="item-price">{{ number_format($item->harga) }}</strong>
-      </div>
-        @empty
-        <div class="text-center">Tidak Ada Data Produk</div>
-        @endforelse
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+
+
+          <div class="site-section-heading pt-3 mb-4">
+            <h2 class="text-black">Murni Collection</h2>
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.</p>
+          <p>Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.</p>
+
+        </div>
       </div>
     </div>
   </div>
-
 
   <div class="site-blocks-cover inner-page py-5" data-aos="fade">
     <div class="container">

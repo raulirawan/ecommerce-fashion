@@ -71,7 +71,8 @@ Route::prefix('admin')->middleware(['admin','auth'])->group(function () {
 
 
     // CRUD PRODUK
-    Route::get('produk', 'Admin\ProdukController@index')->name('admin.produk.index');
+    Route::get('produk/list-produk', 'Admin\ProdukController@listProduk')->name('admin.produk.list');
+    Route::get('produk/{kategori_id}', 'Admin\ProdukController@index')->name('admin.produk.index');
     Route::post('produk/create', 'Admin\ProdukController@store')->name('admin.produk.store');
     Route::post('produk/update/{id}', 'Admin\ProdukController@update')->name('admin.produk.update');
     Route::delete('produk/delete/{id}', 'Admin\ProdukController@delete')->name('admin.produk.delete');
@@ -83,7 +84,7 @@ Route::prefix('admin')->middleware(['admin','auth'])->group(function () {
     Route::post('transaksi/update/resi/{id}', 'Admin\TransaksiController@updateResi')->name('admin.transaksi.update.resi');
 });
 
-Route::prefix('pimpinan')->middleware(['auth'])->group(function () {
+Route::prefix('pemilik')->middleware(['auth'])->group(function () {
     Route::get('dashboard','Admin\DashboardController@index')->name('pimpinan.dashboard.index');
 
     // Transaksi

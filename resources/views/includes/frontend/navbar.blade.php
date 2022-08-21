@@ -22,7 +22,7 @@
             <ul class="site-menu js-clone-nav d-none d-lg-block">
               <li><a href="{{ route('home.index') }}">Home</a></li>
               <li><a href="{{ route('shop.index') }}">Shop</a></li>
-              <li class="has-children">
+              {{-- <li class="has-children">
                 <a href="#">Kategori</a>
                 <ul class="dropdown">
                     @foreach (App\Kategori::all() as $item)
@@ -32,7 +32,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
-              </li>
+              </li> --}}
               @auth
               <li class="has-children">
                 <a href="#">My Account</a>

@@ -3,15 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Produk;
+use App\Kategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function listProduk()
     {
-        $produk = Produk::all();
+        $listProduk = Kategori::with(['produk'])->has('produk')->get();
+        return view('admin.produk.list-produk', compact('listProduk'));
+    }
+    public function index($id)
+    {
+        $produk = Produk::where('kategori_id',$id)->get();
         return view('admin.produk.index', compact('produk'));
     }
 
@@ -37,9 +43,9 @@ class ProdukController extends Controller
         $data->save();
 
         if($data != null) {
-            return redirect()->route('admin.produk.index')->with('success','Data Berhasil di Tambah');
+            return redirect()->route('admin.produk.index', $request->kategori_id)->with('success','Data Berhasil di Tambah');
         } else {
-            return redirect()->route('admin.produk.index')->with('error','Data Gagal di Tambah');
+            return redirect()->route('admin.produk.index', $request->kategori_id)->with('error','Data Gagal di Tambah');
         }
     }
 
@@ -68,24 +74,24 @@ class ProdukController extends Controller
         $data->save();
 
         if($data != null) {
-            return redirect()->route('admin.produk.index')->with('success','Data Berhasil di Update');
+            return redirect()->route('admin.produk.index', $request->kategori_id)->with('success','Data Berhasil di Update');
         } else {
-            return redirect()->route('admin.produk.index')->with('error','Data Gagal di Update');
+            return redirect()->route('admin.produk.index', $request->kategori_id)->with('error','Data Gagal di Update');
         }
     }
 
     public function delete($id)
     {
         $data = Produk::findOrFail($id);
-
+        $kategori_id = $data->kategori_id;
         if($data != null) {
             if(file_exists($data->gambar)) {
                 unlink($data->gambar);
             }
             $data->delete();
-            return redirect()->route('admin.produk.index')->with('success','Data Berhasil di Hapus');
+            return redirect()->route('admin.produk.index', $kategori_id)->with('success','Data Berhasil di Hapus');
         } else {
-            return redirect()->route('admin.produk.index')->with('error','Data Gagal di Hapus');
+            return redirect()->route('admin.produk.index', $kategori_id)->with('error','Data Gagal di Hapus');
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Kategori;
 use App\Produk;
 use Illuminate\Http\Request;
 
@@ -24,8 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $produk = Produk::all();
-
+        $produk = Kategori::with(['produk'])->has('produk')->get();
         return view('home', compact('produk'));
     }
 

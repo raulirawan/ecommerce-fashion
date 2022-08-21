@@ -19,6 +19,10 @@ class CartController extends Controller
     }
     public function addCart(Request $request, $id)
     {
+        $stok = Produk::where('id', $id)->first()->stok;
+        if($stok < $request->qty) {
+            return redirect()->back()->with('error','Stok Barang Tidak Cukup!');
+        }
         $harga = Produk::where('id', $id)->first()->harga;
 
         $cart = new Cart();
@@ -29,7 +33,7 @@ class CartController extends Controller
             $dataCart->save();
         } else {
             $cart->produk_id = $id;
-            $cart->harga = $harga;
+            $cart->harga = $harga * $request->qty;
             $cart->user_id = Auth::user()->id;
             $cart->qty = $request->qty;
             $cart->save();

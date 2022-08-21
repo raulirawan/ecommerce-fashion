@@ -15,7 +15,7 @@
                     <a href="{{ route('admin.kategori.index') }}"><i class="menu-icon fa fa-list"></i>Kategori </a>
                 </li>
                 <li class="{{ request()->is('admin/produk*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.produk.index') }}"><i class="menu-icon fa fa-gift"></i>Produk </a>
+                    <a href="{{ route('admin.produk.list') }}"><i class="menu-icon fa fa-gift"></i>Produk </a>
                 </li>
                 <li class="{{ request()->is('admin/transaksi*') ? 'active' : '' }}">
                     <a href="{{ route('admin.transaksi.index') }}"><i class="menu-icon fa fa-file-text"></i>Transaksi </a>

@@ -126,11 +126,11 @@ aria-hidden="true">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Kategori</label>
-                        <select name="kategori_id" id="kategori_id" class="form-control" required>
-                            <option value="">Pilih Kategori</option>
-                            @foreach ($kategoris = App\Kategori::all() as $kategori)
+                        <select name="kategori_id" id="kategori_id" class="form-control" required readonly>
+                            <option value="{{ $item->kategori->first()->id }}">{{ $item->kategori->first()->nama_kategori }}</option>
+                            {{-- @foreach ($kategoris = App\Kategori::all() as $kategori)
                             <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                     <div class="form-group">
@@ -182,10 +182,11 @@ aria-hidden="true">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Kategori</label>
-                        <select name="kategori_id" id="kategori_edit" class="form-control" required>
-                            @foreach ($kategoris = App\Kategori::all() as $kategori)
+                        <select name="kategori_id" id="kategori_edit" class="form-control" required readonly>
+                            {{-- @foreach ($kategoris = App\Kategori::all() as $kategori)
                             <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
-                            @endforeach
+                            @endforeach --}}
+                            <option value="{{ $item->kategori->first()->id }}">{{ $item->kategori->first()->nama_kategori }}</option>
                         </select>
                     </div>
                     <div class="form-group">
